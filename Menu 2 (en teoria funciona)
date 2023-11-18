@@ -34,6 +34,7 @@ dict_categorys = {1:"Straw hat",2:"Pirates Buggy",3:"Pirates Rocks",4:"Admiral",
 cabecera2=("***************** Menu 2 - Create*******************\n"+"1)Create Character\n"+"2)Create Weapon\n"+"3)Back\n")
 
 seleccionArma = True
+crearCharacter = True
 saveCharacter = True
 saveWeapon = True
 
@@ -57,60 +58,73 @@ while True:
             if name == "" and cat == 0:
 
                 name = input("Name of the new character:\n")
-                print("SIde of the new character:\n"+"1)Marine\n"+"2)Pirates")
-                opcion = input("Option >\n")
-                if opcion.isdigit():
-                    opcion = int(opcion)
+                while crearCharacter:
+                    print("SIde of the new character:\n"+"1)Marine\n"+"2)Pirates")
+                    opcion = input("Option >\n")
+                    if opcion.isdigit():
+                        opcion = int(opcion)
 
-                    if opcion == 1:
-                        print(
-                            "Range or crew of the new character:\n" + "1) Admirant\n" + "2) Viceadmirant\n" +
-                            "3)Lieutenant\n")
-                        opcion = input("Option >\n")
+                        if opcion == 1:
 
-                        if opcion.isdigit():
-                            opcion = int(opcion)
+                            print(
+                                "Range or crew of the new character:\n" + "1) Admirant\n" + "2) Viceadmirant\n" +
+                                "3)Lieutenant\n")
+                            opcion = input("Option >\n")
 
-                            if opcion == 1:#admirant
-                                cat = 4
+                            if opcion.isdigit():
+                                opcion = int(opcion)
 
-                            elif opcion == 2:#viceadmirant
-                                cat = 5
+                                if opcion == 1:#admirant
+                                    cat = 4
+                                    crearCharacter = False
 
-                            elif opcion == 3:#Lieutenant
-                                cat = 6
 
+                                elif opcion == 2:#viceadmirant
+                                    cat = 5
+                                    crearCharacter = False
+
+
+                                elif opcion == 3:#Lieutenant
+                                    cat = 6
+                                    crearCharacter = False
+
+
+                                else:
+                                    print("Opción no válida\n")
                             else:
-                                print("Opción no válida\n")
+                                print("opción no valida")
+
+
+                        elif opcion == 2:
+
+                                print(
+                                    "Range or crew of the new character:\n" + "1) Straw hat\n" + "2) Pirates Buggy\n" + "3) Pirates Rocks\n")
+                                opcion = input("Option >\n")
+
+                                if opcion.isdigit():
+                                    opcion = int(opcion)
+
+                                    if opcion == 1:
+                                        cat = 1
+                                        crearCharacter = False
+
+                                    elif opcion == 2:
+                                        cat = 2
+                                        crearCharacter = False
+
+                                    elif opcion == 3:
+                                        cat = 3
+                                        crearCharacter = False
+
+                                    else:
+                                        print("Opción no válida\n")
+                                else:
+                                    print("Introduce una opcion numerica\n")
                         else:
-                            print("opción no valida")
+                            print("Opción no válida\n")
 
-
-                    elif opcion == 2:
-                        print(
-                            "Range or crew of the new character:\n" + "1) Straw hat\n" + "2) Pirates Buggy\n" + "3) Pirates Rocks\n")
-                        opcion = input("Option >\n")
-
-                        if opcion.isdigit():
-                            opcion = int(opcion)
-
-                            if opcion == 1:
-                                cat = 1
-
-                            elif opcion == 2:
-                                cat = 2
-
-                            elif opcion == 3:
-                                cat = 3
-
-                            else:
-                                print("Opción no válida\n")
-                        else:
-                            print("Introduce una opcion numerica\n")
                     else:
-                        print("Opción no válida\n")
-                else:
-                    print("Introduce una opcion numerica\n")
+                        print("Introduce una opcion numerica\n")
 
 
             while seleccionArma:
@@ -185,7 +199,7 @@ while True:
                             if opcion == weapons[i]:
                                 weapons.pop(i)
                                 break
-                if opcion != 0:
+                if opcion != 0 and deleteWeapon == False:
                     weapons.append(opcion)
 
 
@@ -214,14 +228,14 @@ while True:
             break
 
         elif opcion == 2:#CREAR ARMA
-            id = len(dict_weapons)+1
+            id_weapon = len(dict_weapons)+1
 
             print("****** Menu 22 - Create Weapon**")
             nameWeapon = input("Name of the new weapon:\n")
             print("Weapon strenght: 1-9 \n")
             strength = int(input("->Strenght: "))
 
-            if not strength in range (1,9): #VALOR VALIDO
+            if not strength in range(10) or strength == 0: #VALOR VALIDO
                 print("==== Invalid Option ====")
                 input("Press Enter to continue")
                 strength = int(input("->Strenght: "))
@@ -229,7 +243,7 @@ while True:
             print("Weapon speed: 1-9 \n")
             speed = int(input("->Speed: "))
 
-            if not speed in range (1,9):
+            if not speed in range(10) or speed == 0:
                 print("==== Invalid Option ====\n")
                 input("Press Enter to continue\n")
                 speed = int(input("->Speed: "))
@@ -256,11 +270,13 @@ while True:
                 save = input("Save this weapon? S/N\n")
 
                 if save == "s" or save == "S":
-                    dict_weapons[id] = {"name" : nameWeapon,"strength" : strength, "speed" : speed,f"two_hand" : two_hands}
+                    dict_weapons[id_weapon] = {"name" : nameWeapon,"strength" : strength, "speed" : speed,f"two_hand" : two_hands}
                     saveWeapon = False
 
                 elif save == "n" or save == "N":
-                    saveWeaponr = False
+                    saveWeapon = False
+            break
+
 
         elif opcion == 3:
             print("Cerrando programa...")
