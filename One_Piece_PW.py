@@ -292,11 +292,11 @@ while salir != True:
 
             if deleteWeapon == True:
                 if len(weapons) == 1:
-                    weapons.pop(0)# Eliminar un elemento
+                    weapons.remove(opcion)# Eliminar un elemento
                 else:
                     for i in range(len(weapons)):#recorre weapons para eliminar arma
                         if opcion == weapons[i]:
-                            weapons.pop(i)
+                            weapons.remove(opcion)
                             break
             if opcion != 0 and deleteWeapon == False:
                 weapons.append(opcion)
