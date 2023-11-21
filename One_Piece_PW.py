@@ -66,7 +66,7 @@ menu04 = "============Menu04 (List)=============\n\n1)List Characters\n2)List We
 
 menu041 = "======Menu041 (List Characters)======\n\n1)List by ID\n2)List by Name\n3)List by Strength\n4)List by Speed\n5)Go Back"
 
-menu042 = "======Menu041 (List Characters)======\n\n1)List by ID\n2)List by Name\n3)List by Strength\n4)List by Speed\n5)Go Back"
+menu042 = "======Menu042 (List Characters)======\n\n1)List by ID\n2)List by Name\n3)List by Strength\n4)List by Speed\n5)Go Back"
 
 cabecera_armas = 'Available Weapons'.center(40, '=') + '\n' + 'None'.center(40,
                                                                             '-') + '\n' + 'Character weapons:'.center(
@@ -135,8 +135,9 @@ while salir != True:
         elif not int(opc) in range(1, 4):
             print("wrong option")
         elif int(opc) == 3:
-            flg_06 = False
             flg_00 = True
+            flg_06 = False
+
         else:
             if int(opc) == 1:
                 creacionCharacter = True
@@ -297,11 +298,11 @@ while salir != True:
 
             if deleteWeapon == True:
                 if len(weapons) == 1:
-                    weapons.remove(opcion)  # Eliminar un elemento
+                    weapons.pop(0)  # Eliminar un elemento
                 else:
                     for i in range(len(weapons)):  # recorre weapons para eliminar arma
                         if opcion == weapons[i]:
-                            weapons.remove(opcion)
+                            weapons.pop(i)
                             break
             if opcion != 0 and deleteWeapon == False:
                 weapons.append(opcion)
@@ -401,8 +402,9 @@ while salir != True:
             flg_02 = False
             # para menu042
         elif int(opc) == 5:
-            flg_02 = False
             flg_00 = True
+            flg_02 = False
+
             # atras
     #############menu041####################
     while flg_03:
@@ -417,10 +419,154 @@ while salir != True:
 
         elif int(opc) == 5:
             flg_03 = False
-            flg_00 = True
+            flg_02 = True
             # atras
         elif int(opc) == 1:
-            print()
+
+            # LISTAR ID ============
+            table = ""
+            menuCharactersID = "=" * 19 + "Characters ordered by Id" + "=" * 19 + "\n" + "ID".ljust(10) + "Name".ljust(
+                15) \
+                               + "Strength".ljust(13) + "Speed".ljust(14) + "Experience\n" + "*" * 62
+            print(menuCharactersID)
+
+            listaID = list(dict_characters.keys())
+
+            for pasada in range(len(listaID) - 1):
+                for key in range(len(listaID) - 1 - pasada):
+                    if listaID[key] > listaID[key + 1]:
+                        opc = listaID[key]
+                        listaID[key] = listaID[key + 1]
+                        listaID[key + 1] = opc
+
+            for i in listaID:
+                # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                total_strength = dict_characters[i]["strength"]
+                total_speed = dict_characters[i]["speed"]
+
+                for j in dict_characters[i]["weapons"]:  # BUCLE DE SUMA TOTAL
+                    total_strength += dict_weapons[j]["strength"]
+                    total_speed += dict_weapons[j]["speed"]
+
+                table += f"{i}".ljust(10) + dict_characters[i]["name"].ljust(13) + " " + str(total_strength).rjust(9) + \
+                         " " + str(total_speed).rjust(9) + " " + str(dict_characters[i]["experience"]).rjust(18) + "\n"
+            print(table)
+            print("\n\n")
+
+        elif int(opc) == 2:
+            # LISTAR Name ============
+            table = ""
+            menuCharactersName = "=" * 19 + "Characters ordered by Name" + "=" * 19 + "\n" + "ID".ljust(
+                10) + "Name".ljust(15) \
+                                 + "Strength".ljust(13) + "Speed".ljust(14) + "Experience\n" + "*" * 62
+            print(menuCharactersName)
+            listaName = []
+            for i in dict_characters:
+                listaName.append(dict_characters[i]["name"])
+
+            for pasada in range(len(listaName) - 1):
+                for name in range(len(listaName) - 1 - pasada):
+                    if listaName[name] > listaName[name + 1]:
+                        opc = listaName[name]
+                        listaName[name] = listaName[name + 1]
+                        listaName[name + 1] = opc
+
+            for i in listaName:  # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                for j in range(1, len(dict_characters) + 1):  #
+                    if dict_characters[j]["name"] == i:
+                        total_strength = dict_characters[j]["strength"]
+                        total_speed = dict_characters[j]["speed"]
+
+                        for k in dict_characters[j]["weapons"]:  # BUCLE DE SUMA TOTAL
+                            total_strength += dict_weapons[k]["strength"]
+                            total_speed += dict_weapons[k]["speed"]
+
+                        table += f"{str(j)}".ljust(10) + dict_characters[j]["name"].ljust(13) + " " + str(
+                            total_strength).rjust(9) + \
+                                 " " + str(total_speed).rjust(9) + " " + str(dict_characters[j]["experience"]).rjust(
+                            18) + "\n"
+            print(table)
+            print("\n\n")
+
+
+        elif int(opc) == 3:
+            table = ""
+            menuCharactersStrength = "Characters ordered by Strength".center(62,'=') + "\n" + "ID".ljust(
+                10) + "Name".ljust(15) \
+                                     + "Strength".ljust(13) + "Speed".ljust(14) + "Experience\n" + "*" * 62
+            print(menuCharactersStrength)
+            listaID = []
+            for i in range(1, len(dict_characters) + 1):
+                listaID.append(i)
+            listaStrength = []
+            for i in listaID:
+                # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                total_strength = dict_characters[i]["strength"]
+                for j in dict_characters[i]["weapons"]:  # BUCLE DE SUMA TOTAL
+                    total_strength += dict_weapons[j]["strength"]
+                listaStrength.append(total_strength)
+
+            for pasada in range(len(listaStrength) - 1):
+                for j in range(len(listaStrength) - 1 - pasada):
+                    if listaStrength[j] < listaStrength[j + 1]:
+                        listaStrength[j], listaStrength[j + 1] = listaStrength[j + 1], listaStrength[j]
+                        listaID[j], listaID[j + 1] = listaID[j + 1], listaID[j]
+
+            for j in listaID:  # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                for i in range(1, len(dict_characters) + 1):
+                    if i == j:
+                        total_strength = dict_characters[i]["strength"]
+                        total_speed = dict_characters[i]["speed"]
+                        for k in dict_characters[i]["weapons"]:  # BUCLE DE SUMA TOTAL
+                            total_strength += dict_weapons[k]["strength"]
+                            total_speed += dict_weapons[k]["speed"]
+                        table += f"{str(i)}".ljust(10) + dict_characters[i]["name"].ljust(13) + " " + str(
+                            total_strength).rjust(9) + \
+                                 " " + str(total_speed).rjust(9) + " " + str(dict_characters[i]["experience"]).rjust(
+                            18) + "\n"
+            print(table)
+            print("\n\n")
+
+        elif int(opc) == 4:
+                ##listar speed
+                table = ""
+                menuCharactersSpeed = "Characters ordered by Speed".center(62,'=')+ "\n" + "ID".ljust(
+                    10) + "Name".ljust(15) \
+                                      + "Strength".ljust(13) + "Speed".ljust(14) + "Experience\n" + "*" * 62
+                print(menuCharactersSpeed)
+
+                listaID = []
+                for i in range(1, len(dict_characters) + 1):
+                    listaID.append(i)
+                listaSpeed = []
+                for i in listaID:
+                    # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                    total_speed = dict_characters[i]["speed"]
+                    for j in dict_characters[i]["weapons"]:  # BUCLE DE SUMA TOTAL
+                        total_speed += dict_weapons[j]["speed"]
+                    listaSpeed.append(total_speed)
+
+                for pasada in range(len(listaSpeed) - 1):
+                    for j in range(len(listaSpeed) - 1 - pasada):
+                        if listaSpeed[j] < listaSpeed[j + 1]:
+                            listaSpeed[j], listaSpeed[j + 1] = listaSpeed[j + 1], listaSpeed[j]
+                            listaID[j], listaID[j + 1] = listaID[j + 1], listaID[j]
+
+                for j in listaID:  # RECUENTO DE LOS DIFERENTES VALORES DE CADA PARÁMETRO
+                    for i in range(1, len(dict_characters) + 1):
+                        if i == j:
+                            total_strength = dict_characters[i]["strength"]
+                            total_speed = dict_characters[i]["speed"]
+                            for k in dict_characters[i]["weapons"]:  # BUCLE DE SUMA TOTAL
+                                total_strength += dict_weapons[k]["strength"]
+                                total_speed += dict_weapons[k]["speed"]
+
+                            table += f"{str(i)}".ljust(10) + dict_characters[i]["name"].ljust(13) + " " + str(
+                                total_strength).rjust(9) + " " + str(total_speed).rjust(9) + " " + str(
+                                dict_characters[i]["experience"]).rjust(
+                                18) + "\n"
+                print(table)
+                print("\n\n")
 
     #############menu042####################
     while flg_04:
@@ -433,11 +579,123 @@ while salir != True:
         elif not int(opc) in range(1, 6):
             print("wrong option")
         elif int(opc) == 5:
+            flg_02 = True
             flg_04 = False
-            flg_00 = True
+
             # atras
-        #elif int(opc) == 1:
-            #print()
+        elif int(opc) == 1:
+
+            # listar armas por ID
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
+                        17)) + '\n' + '*' * 60 + '\n'
+
+            weapons_list = list(dict_weapons.items())
+
+            for i in range(len(weapons_list) - 1):
+                for j in range(0, len(weapons_list) - i - 1):
+                    if weapons_list[j][0] > weapons_list[j + 1][0]:
+                        # comparar posicion de id
+                        aux = weapons_list[j]
+                        weapons_list[j] = weapons_list[j + 1]
+                        weapons_list[j + 1] = aux
+
+            print(cabecera_list_weapons)
+            # for clave,value in dict_weapons.items():
+
+            # el motivo del item se ve aqui
+            for clave, character in weapons_list:
+                print(str(clave).ljust(10),
+                      str(character['name']).ljust(11),
+                      str(character['strength']).rjust(10),
+                      str(character['speed']).rjust(9),
+                      str(character['two_hand']).rjust(16))
+
+            print('\n')
+
+        elif int(opc) == 2:
+            ##ordenar por nombre
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
+                        17)) + '\n' + '*' * 60 + '\n'
+
+            weapons_list = list(dict_weapons.items())
+            print(weapons_list[0][1])
+            for i in range(len(weapons_list) - 1):
+                for j in range(0, len(weapons_list) - i - 1):
+                    if weapons_list[j][1]['name'] > weapons_list[j + 1][1]['name']:
+                        aux = weapons_list[j]
+                        weapons_list[j] = weapons_list[j + 1]
+                        weapons_list[j + 1] = aux
+
+            print(cabecera_list_weapons)
+            # for clave,value in dict_weapons.items():
+
+            # el motivo del item se ve aqui
+            for clave, character in weapons_list:
+                print(str(clave).ljust(10),
+                      str(character['name']).ljust(11),
+                      str(character['strength']).rjust(10),
+                      str(character['speed']).rjust(9),
+                      str(character['two_hand']).rjust(16))
+
+            print('\n')
+
+        elif int(opc) == 3:
+            ##ordenar por strength
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
+                        17)) + '\n' + '*' * 60 + '\n'
+
+            weapons_list = list(dict_weapons.items())
+            print(weapons_list[0][1])
+            for i in range(len(weapons_list) - 1):
+                for j in range(0, len(weapons_list) - i - 1):
+                    if weapons_list[j][1]['strength'] < weapons_list[j + 1][1]['strength']:
+                        aux = weapons_list[j]
+                        weapons_list[j] = weapons_list[j + 1]
+                        weapons_list[j + 1] = aux
+
+            print(cabecera_list_weapons)
+            # for clave,value in dict_weapons.items():
+
+            # el motivo del item se ve aqui
+            for clave, character in weapons_list:
+                print(str(clave).ljust(10),
+                      str(character['name']).ljust(11),
+                      str(character['strength']).rjust(10),
+                      str(character['speed']).rjust(9),
+                      str(character['two_hand']).rjust(16))
+
+            print('\n')
+
+        elif int(opc) == 4:
+            ##ordenar por speed
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
+                        17)) + '\n' + '*' * 60 + '\n'
+
+            weapons_list = list(dict_weapons.items())
+            print(weapons_list[0][1])
+            for i in range(len(weapons_list) - 1):
+                for j in range(0, len(weapons_list) - i - 1):
+                    if weapons_list[j][1]['speed'] < weapons_list[j + 1][1]['speed']:
+                        aux = weapons_list[j]
+                        weapons_list[j] = weapons_list[j + 1]
+                        weapons_list[j + 1] = aux
+
+            print(cabecera_list_weapons)
+            # for clave,value in dict_weapons.items():
+
+            # el motivo del item se ve aqui
+            for clave, character in weapons_list:
+                print(str(clave).ljust(10),
+                      str(character['name']).ljust(11),
+                      str(character['strength']).rjust(10),
+                      str(character['speed']).rjust(9),
+                      str(character['two_hand']).rjust(16))
+
+            print('\n')
 
     #####################menu03######################
     while flg_05:
@@ -504,23 +762,24 @@ while salir != True:
                             ############menu031
 
                         elif int(opc) == 3:
-                            print()
+                            pass
 
                             # atras al menu 3
                         elif int(opc) == 1:
+                            # cambio nombre personaje
                             # ops1
                             new_name = input('Enter the new name: ')
 
-                            s_n = str(input('Do you want to change name' + dict_characters[id2][
-                                'name'] + 'by' + new_name + '? Press y/n' + '\n'))
+                            s_n = str(input('Do you want to change name ' + dict_characters[id2][
+                                'name'] + ' by ' + new_name + '? Press y/n' + '\n'))
 
-                            if s_n == 'n':
+                            if s_n == 'n' or s_n == 'N':
                                 flg_05 = False
                                 flg_00 = True
 
-                            elif s_n == 'y':
+                            elif s_n == 'y' or s_n == 'Y':
                                 dict_characters[id2]['name'] = new_name
-                                print(dict_characters[id2]['name'])
+                                # se modifica la misma clave
                                 flg_05 = False
                                 flg_00 = True
 
@@ -528,11 +787,13 @@ while salir != True:
                             # ops 2 menu31
                             print_armas = False
                             while not print_armas:
+                                # menu eleccion de armas
                                 if len(dict_characters[id2]['weapons']) == 2:
+                                    # filtro por cantidad de armas por personaje
 
                                     print()
 
-                                    print(cabecera_armas, '@')
+                                    print(cabecera_armas)
                                     for i in range(len(dict_characters[id2]['weapons'])):
                                         print(dict_characters[id2]['weapons'][i], ')',
                                               dict_weapons[dict_characters[id2]['weapons'][i]]['name'], ',',
@@ -540,7 +801,7 @@ while salir != True:
                                               dict_weapons[dict_characters[id2]['weapons'][i]]['strength'], 'Speed: ',
                                               dict_weapons[dict_characters[id2]['weapons'][i]]['speed'])
 
-                                    # print_armas = True
+
                                 elif len(dict_characters[id2]['weapons']) == 1:
                                     if dict_characters[id2]['weapons'][0] == 1 or dict_characters[id2]['weapons'][
                                         0] == 3:
@@ -600,29 +861,25 @@ while salir != True:
                                 print(menu_ad_weapon)
                                 opcion = input("Option ->\n")
 
-                                if opcion.isspace() or opcion == "":  # EVITAR QUE PETE CON ENTER
+                                if opcion.isspace() or opcion == "":  # incorrecto con espacios
                                     print("Enter a numerical option\n")
-                                elif opcion[0] == "-":  # ELIMINAR ARMA COMPROBANDO SI TIENE "-"
+                                # eliminar arma
+                                elif opcion[0] == "-":  # comprobar si tiene "-"
                                     if opcion[1:].isdigit():  # Comprueba que sea numerico
                                         opcion = int(opcion[1:])
-                                        if opcion in dict_characters[id2]['weapons']:
+                                        if opcion in dict_characters[id2][
+                                            'weapons']:  # busca que el numero de arma la tenga el p.
                                             dict_characters[id2]['weapons'].index(opcion)
                                             if dict_characters[id2]['weapons'].index(opcion) == 0:
+                                                # si el arma esta en la primera posicion
                                                 dict_characters[id2]['weapons'] = dict_characters[id2]['weapons'][1:]
+                                                # elimina el arma mediante eliminar la posicion
 
-                                                dict_characters[id2]['strength'] = (dict_characters[id2]['strength']
-                                                                                    - dict_weapons[opcion]['strength'])
-                                                dict_characters[id2]['speed'] = (
-                                                        dict_characters[id2]['speed'] - dict_weapons[opcion]['speed'])
                                                 print('ok1')
                                             else:
+                                                # si el arma esta en la segunda
                                                 dict_characters[id2]['weapons'] = dict_characters[id2]['weapons'][:-1]
-
-                                                dict_characters[id2]['strength'] = (dict_characters[id2]['strength']
-                                                                                    - dict_weapons[opcion]['strength'])
-                                                dict_characters[id2]['speed'] = (
-                                                        dict_characters[id2]['speed'] - dict_weapons[opcion]['speed'])
-
+                                                # elimina el arma mediante eliminar la posicion
 
                                         else:
                                             print('==================Invalid Option==================1')
@@ -635,51 +892,39 @@ while salir != True:
                                 elif opcion.isdigit():
                                     opcion = int(opcion)
                                     if int(opcion) == 0:
-
+                                        # opcion 0 exit
                                         print_armas = True
 
-
+                                    # sumar arma
                                     elif opcion == 2 or opcion == 4 or opcion == 5:
 
                                         if len(dict_characters[id2]['weapons']) == 0:
 
                                             if opcion in dict_weapons:  # Comprueba la id de arma conforme existe
                                                 dict_characters[id2]['weapons'].append(opcion)
-                                                dict_characters[id2]['strength'] = (dict_characters[id2]['strength']
-                                                                                    + dict_weapons[opcion]['strength'])
-                                                dict_characters[id2]['speed'] = (
-                                                        dict_characters[id2]['speed'] + dict_weapons[opcion]['speed'])
-
-                                                edit_menu_fin = True
 
                                             else:
-                                                print('==================Invalid Option==================1a')
+                                                print('==================Invalid Option==================')
                                                 input('Press enter to continue')
 
-
                                         else:
-                                            print('==================Invalid Option==================2a')
+                                            print('==================Invalid Option==================')
                                             input('Press enter to continue')
 
                                     elif opcion == 1 or opcion == 3:
 
                                         if len(dict_characters[id2]['weapons']) == 0 or len(
                                                 dict_characters[id2]['weapons']) == 1:
+                                            # una o dos armas
                                             if opcion in dict_weapons:  # Comprueba la id de arma conforme existe
                                                 dict_characters[id2]['weapons'].append(opcion)
-                                                dict_characters[id2]['strength'] = (dict_characters[id2]['strength']
-                                                                                    + dict_weapons[opcion]['strength'])
-                                                dict_characters[id2]['speed'] = (
-                                                        dict_characters[id2]['speed'] + dict_weapons[opcion]['speed'])
-
-
 
                                             else:
-                                                print('==================Invalid Option==================1b')
+                                                print('==================Invalid Option==================')
                                                 input('Press enter to continue')
 
                                     else:
-                                        print('==================Invalid Option==================2b')
+                                        print('==================Invalid Option==================')
                                         input('Press enter to continue')
 
         elif int(opc) == 2:
@@ -709,7 +954,8 @@ while salir != True:
                 ############menu031
 
             elif int(opc) == 4:
-                print()
+
+                pass
 
                 # atras al menu 3
             elif int(opc) == 1:
@@ -730,7 +976,7 @@ while salir != True:
                     print(dict_weapons[int(id)])  ###se borra al final
 
             elif int(opc) == 2:
-                #strength
+                # strength
 
                 strength2 = input('Enter the new Strength:\n')
 
@@ -743,30 +989,21 @@ while salir != True:
 
                 else:
 
-                    s_n = str(input('Do you want to change strength '+str(dict_weapons[int(id)][
-                        'strength'])+' by '+ str(strength2) + '? Press y/n' + '\n'))
-
-
+                    s_n = str(input('Do you want to change strength ' + str(dict_weapons[int(id)][
+                                                                                'strength']) + ' by ' + str(
+                        strength2) + '? Press y/n' + '\n'))
 
                     if s_n == 'n' or s_n == 'N':
-                        print()
-
-
+                        print('\n')
 
                     elif s_n == 'y' or s_n == 'Y':
-                        #dict_weapons[int(id)]['strength'] = int(Strength2)
-
-
 
                         dict_weapons[int(id)]['strength'] = int(strength2)
                         print(dict_weapons[int(id)]['strength'])
 
-                        print('+++@@@')
-
-
 
             elif int(opc) == 3:
-                #speed
+                # speed
 
                 speed2 = input('Enter the new Speed:\n')
 
@@ -779,8 +1016,9 @@ while salir != True:
 
                 else:
 
-                    s_n = str(input('Do you want to change speed '+str(dict_weapons[int(id)][
-                        'speed'])+' by '+ str(speed2) + '? Press y/n' + '\n'))
+                    s_n = str(input('Do you want to change speed ' + str(dict_weapons[int(id)][
+                                                                             'speed']) + ' by ' + str(
+                        speed2) + '? Press y/n' + '\n'))
 
                     if s_n == 'n' or s_n == 'N':
                         print()
@@ -788,7 +1026,6 @@ while salir != True:
                     elif s_n == 'y' or s_n == 'Y':
 
                         dict_weapons[int(id)]['speed'] = int(speed2)
-
 
 
 
