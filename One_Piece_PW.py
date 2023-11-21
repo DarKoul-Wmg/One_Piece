@@ -102,9 +102,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 6):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif int(opc) == 1:
             flg_00 = True
             print('not implemented')
@@ -131,9 +133,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 4):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif int(opc) == 3:
             flg_00 = True
             flg_06 = False
@@ -390,9 +394,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 7):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif int(opc) == 1:
             flg_03 = True
             flg_02 = False
@@ -413,9 +419,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 6):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
 
         elif int(opc) == 5:
             flg_03 = False
@@ -575,9 +583,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 6):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif int(opc) == 5:
             flg_02 = True
             flg_04 = False
@@ -586,9 +596,11 @@ while salir != True:
         elif int(opc) == 1:
 
             # listar armas por ID
-            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
-                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
-                        17)) + '\n' + '*' * 60 + '\n'
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=')
+                                     + '\n' + 'ID'.ljust(10)
+                                     + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10)
+                                     + 'Two_hand'.rjust(17)) + '\n' + '*' * 60 + '\n'
 
             weapons_list = list(dict_weapons.items())
 
@@ -615,12 +627,13 @@ while salir != True:
 
         elif int(opc) == 2:
             ##ordenar por nombre
-            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
-                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
-                        17)) + '\n' + '*' * 60 + '\n'
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n'
+                                     + 'ID'.ljust(10) + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10)
+                                     + 'Two_hand'.rjust(17)) + '\n' + '*' * 60 + '\n'
 
             weapons_list = list(dict_weapons.items())
-            print(weapons_list[0][1])
+            
             for i in range(len(weapons_list) - 1):
                 for j in range(0, len(weapons_list) - i - 1):
                     if weapons_list[j][1]['name'] > weapons_list[j + 1][1]['name']:
@@ -643,12 +656,13 @@ while salir != True:
 
         elif int(opc) == 3:
             ##ordenar por strength
-            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
-                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
-                        17)) + '\n' + '*' * 60 + '\n'
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10)
+                                     + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10)
+                                     + 'Two_hand'.rjust(17)) + '\n' + '*' * 60 + '\n'
 
             weapons_list = list(dict_weapons.items())
-            print(weapons_list[0][1])
+
             for i in range(len(weapons_list) - 1):
                 for j in range(0, len(weapons_list) - i - 1):
                     if weapons_list[j][1]['strength'] < weapons_list[j + 1][1]['strength']:
@@ -671,12 +685,13 @@ while salir != True:
 
         elif int(opc) == 4:
             ##ordenar por speed
-            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10) + 'Name'.ljust(13)
-                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10) + 'Two_hand'.rjust(
-                        17)) + '\n' + '*' * 60 + '\n'
+            cabecera_list_weapons = ('Weapons ordered by ID'.center(60, '=') + '\n' + 'ID'.ljust(10)
+                                     + 'Name'.ljust(13)
+                                     + 'Strength'.rjust(10) + 'Speed'.rjust(10)
+                                     + 'Two_hand'.rjust(17)) + '\n' + '*' * 60 + '\n'
 
             weapons_list = list(dict_weapons.items())
-            print(weapons_list[0][1])
+
             for i in range(len(weapons_list) - 1):
                 for j in range(0, len(weapons_list) - i - 1):
                     if weapons_list[j][1]['speed'] < weapons_list[j + 1][1]['speed']:
@@ -704,9 +719,11 @@ while salir != True:
         opc = input("->Options: " + "\n")
         # comprobar opciones menu correctas
         if not opc.isdigit():
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif not int(opc) in range(1, 5):
-            print("wrong option")
+            print('==================Invalid Option==================')
+            input('Press enter to continue')
         elif int(opc) == 3:
             flg_05 = False
             flg_00 = True
@@ -737,13 +754,13 @@ while salir != True:
             while not id_correcto:
                 id = input('ID to edit:' + '\n')
                 if not id.isdigit():
-                    print('==================Invalid Option==================3')
+                    print('==================Invalid Option==================')
                     input('Pres enter to continue') + '\n'
                 else:
 
                     # comprobacion de id
                     if not int(id) in dict_characters:
-                        print('==================Invalid Option==================3')
+                        print('==================Invalid Option==================')
                         input('Pres enter to continue') + '\n'
 
                     else:
@@ -756,9 +773,11 @@ while salir != True:
                         opc = input("->Options: " + "\n")
                         # comprobar opciones menu correctas
                         if not opc.isdigit():
-                            print("wrong option")
+                            print('==================Invalid Option==================')
+                            input('Press enter to continue')
                         elif not int(opc) in range(1, 4):
-                            print("wrong option")
+                            print('==================Invalid Option==================')
+                            input('Press enter to continue')
                             ############menu031
 
                         elif int(opc) == 3:
@@ -816,7 +835,7 @@ while salir != True:
                                                 print(clave, ')', dict_weapons[clave]['name'], ',', 'Strength: ',
                                                       dict_weapons[clave]['strength'],
                                                       'Speed: ', dict_weapons[clave]['speed'])
-                                        print('===========Character weapons:===========2')
+                                        print('===========Character weapons:===========')
                                         for i in range(len(dict_characters[id2]['weapons'])):
                                             print(dict_characters[id2]['weapons'][i], ')',
                                                   dict_weapons[dict_characters[id2]['weapons'][i]]['name'], ',',
@@ -829,7 +848,7 @@ while salir != True:
                                     else:
 
                                         print()
-                                        print('===========Available Weapons============3')
+                                        print('===========Available Weapons============')
                                         print('------------------None------------------')
                                         print('===========Character weapons:===========')
                                         for i in range(len(dict_characters[id2]['weapons'])):
@@ -848,12 +867,12 @@ while salir != True:
 
                                     print()
 
-                                    print('===========Available Weapons============5')
+                                    print('===========Available Weapons============')
                                     for clave in dict_weapons.keys():
                                         print(clave, ')', dict_weapons[clave]['name'], ',', 'Strength: ',
                                               dict_weapons[clave]['strength'],
                                               'Speed: ', dict_weapons[clave]['speed'])
-                                    print('===========Character weapons:===========6')
+                                    print('===========Character weapons:===========')
                                     print()
                                     # print_armas = True
 
@@ -882,12 +901,12 @@ while salir != True:
                                                 # elimina el arma mediante eliminar la posicion
 
                                         else:
-                                            print('==================Invalid Option==================1')
+                                            print('==================Invalid Option==================')
                                             input('Press enter to continue')
 
 
                                     else:
-                                        print('==================Invalid Option==================2')
+                                        print('==================Invalid Option==================')
                                         input('Press enter to continue')
                                 elif opcion.isdigit():
                                     opcion = int(opcion)
@@ -1026,11 +1045,4 @@ while salir != True:
                     elif s_n == 'y' or s_n == 'Y':
 
                         dict_weapons[int(id)]['speed'] = int(speed2)
-
-
-
-
-
-
-
 
